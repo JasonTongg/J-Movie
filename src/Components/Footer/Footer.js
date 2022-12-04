@@ -5,7 +5,11 @@ import bg from '../../Assets/background.jpg';
 
 export default function Footer() {
   return (
-    <Foo style={{backgroundImage: `url("${bg}")`}}>
+    <Foo
+      style={{
+        backgroundImage: `linear-gradient(to bottom, black, transparent) ,url("${bg}")`,
+      }}
+    >
       <Logo></Logo>
       <List>
         <ul>

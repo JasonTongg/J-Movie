@@ -1,18 +1,24 @@
 import React from 'react';
-import {Outlet} from 'react-router-dom';
 import Footer from '../Components/Footer/Footer';
 import {Container} from './Style';
 import Header from '../Components/Header/Header';
 import Swiper from '../Components/Swiper/Swiper';
+import DetailHeader from '../Components/DetailHeader/DetailHeader';
 
-export default function MainLayout() {
+export default function MainLayout({type, children}) {
   console.log(window.location.pathname === '/');
   return (
     <Container>
       <Header
-        content={window.location.pathname === '/' ? <Swiper></Swiper> : null}
+        content={
+          type === 'home' ? (
+            <Swiper></Swiper>
+          ) : type === 'detail' ? (
+            <DetailHeader></DetailHeader>
+          ) : null
+        }
       ></Header>
-      <Outlet />
+      {children}
       <Footer />
     </Container>
   );

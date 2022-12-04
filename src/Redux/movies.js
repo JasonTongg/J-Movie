@@ -4,13 +4,40 @@ import {toast} from 'react-toastify';
 
 let initialState = {
   moviePopular: [],
+  movieUpComing: [],
   movieTopRate: [],
   tvPopular: [],
   tvTopRate: [],
+  details: {},
   isLoading: false,
 };
 
 let api_key = '154434997f5a23ef8aa4dd4eb1a8a774';
+
+export let detailMovie = createAsyncThunk(
+  'movie/detail',
+  async (id, thunkAPI) => {
+    try {
+      let data = await axiosFetch.get(`movie/${id}?api_key=${api_key}&page=1`);
+      thunkAPI.dispatch(credits(data.data.id));
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export let credits = createAsyncThunk('credits', async (id, thunkAPI) => {
+  try {
+    let data = await axiosFetch.get(
+      `movie/${id}/credits?api_key=${api_key}&page=1`
+    );
+    console.log(data.data);
+    return data.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
 
 export let getPopularMovie = createAsyncThunk(
   'movie/popular',
@@ -25,6 +52,21 @@ export let getPopularMovie = createAsyncThunk(
     }
   }
 );
+
+export let getUpComingMovie = createAsyncThunk(
+  'movie/upcoming',
+  async (_, thunkAPI) => {
+    try {
+      let data = await axiosFetch.get(
+        `movie/upcoming?api_key=${api_key}&page=1`
+      );
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export let getPopularTV = createAsyncThunk(
   'tv/popular',
   async (_, thunkAPI) => {
@@ -36,6 +78,7 @@ export let getPopularTV = createAsyncThunk(
     }
   }
 );
+
 export let getTopRateMovie = createAsyncThunk(
   'movie/top-rate',
   async (_, thunkAPI) => {
@@ -47,6 +90,7 @@ export let getTopRateMovie = createAsyncThunk(
     }
   }
 );
+
 export let getTopRateTV = createAsyncThunk(
   'tv/top-rate',
   async (_, thunkAPI) => {
@@ -71,6 +115,28 @@ let movies = createSlice({
       state.moviePopular = payload.results;
     },
     [getPopularMovie.rejected]: (state, {payload}) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+    [credits.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [credits.fulfilled]: (state, {payload}) => {
+      state.isLoading = false;
+      state.details = {...state.details, credits: payload.cast};
+    },
+    [credits.rejected]: (state, {payload}) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
+    [getUpComingMovie.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getUpComingMovie.fulfilled]: (state, {payload}) => {
+      state.isLoading = false;
+      state.movieUpComing = payload.results;
+    },
+    [getUpComingMovie.rejected]: (state, {payload}) => {
       state.isLoading = false;
       toast.error(payload);
     },
@@ -105,6 +171,15 @@ let movies = createSlice({
     },
     [getTopRateTV.rejected]: (state, {payload}) => {
       state.isLoading = false;
+      toast.error(payload);
+    },
+    [detailMovie.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [detailMovie.fulfilled]: (state, {payload}) => {
+      state.details = payload;
+    },
+    [detailMovie.rejected]: (state, {payload}) => {
       toast.error(payload);
     },
   },
