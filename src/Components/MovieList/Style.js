@@ -29,12 +29,13 @@ export const Container = styled.div`
       z-index: 2;
       background-color: rgba(0, 0, 0, 0.5);
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 1.2rem;
       padding: 2rem;
       box-sizing: border-box;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease-out;
+      font-weight: 300;
     }
 
     &:hover .posterOverlay {
@@ -48,6 +49,7 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1rem;
 
   button {
     padding: 0.5rem 1.2rem;

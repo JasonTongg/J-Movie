@@ -5,16 +5,36 @@ import 'swiper/swiper.min.css';
 import {useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {detailMovie} from '../../Redux/movies';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 export default function MovieList({title, data}) {
   let navigate = useNavigate();
   let dispatch = useDispatch();
-  data = data.filter((item) => item.poster_path).slice(0, 10);
+  let dataa = data.data?.filter((item) => item.poster_path).slice(0, 10);
 
   let toDetails = (id) => {
-    dispatch(detailMovie(id));
+    console.log(id);
+    dispatch(detailMovie({id, type: dataa[0].first_air_date ? 'tv' : 'movie'}));
     navigate('/details');
   };
+
+  if (data.loading) {
+    return (
+      <Container>
+        <Header>
+          <h3>{title}</h3>
+          <button>View More</button>
+        </Header>
+
+        <ClipLoader
+          color={'#ffffff'}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -28,7 +48,7 @@ export default function MovieList({title, data}) {
         spaceBetween={10}
         slidesPerView={(window.innerWidth / 250).toFixed(2)}
       >
-        {data.map((item, i) => (
+        {dataa?.map((item, i) => (
           <SwiperSlide key={i}>
             <div className="content" onClick={() => toDetails(item.id)}>
               <img
@@ -36,7 +56,7 @@ export default function MovieList({title, data}) {
                 alt={item.title}
               />
               <div className="posterOverlay">
-                <h3>{item.original_title || item.original_name}</h3>
+                <p>{item.original_title || item.original_name}</p>
               </div>
             </div>
           </SwiperSlide>

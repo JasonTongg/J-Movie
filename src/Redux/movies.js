@@ -3,12 +3,17 @@ import axiosFetch from '../Utils/Axios';
 import {toast} from 'react-toastify';
 
 let initialState = {
-  moviePopular: [],
-  movieUpComing: [],
-  movieTopRate: [],
-  tvPopular: [],
-  tvTopRate: [],
-  details: {},
+  moviePopular: {data: [], isLoading: false},
+  movieUpComing: {data: [], isLoading: false},
+  movieTopRate: {data: [], isLoading: false},
+  tvPopular: {data: [], isLoading: false},
+  tvTopRate: {data: [], isLoading: false},
+  discover: {data: [], isLoading: false},
+  details: {data: {}, isLoading: false},
+  detailsSimilar: {data: [], isLoading: false},
+  detailsVideo: {data: [], isLoading: false},
+  detailsCredit: {data: [], isLoading: false},
+  discoverVar: {},
   isLoading: false,
 };
 
@@ -16,11 +21,14 @@ let api_key = '154434997f5a23ef8aa4dd4eb1a8a774';
 
 export let detailMovie = createAsyncThunk(
   'movie/detail',
-  async (id, thunkAPI) => {
+  async ({id, type}, thunkAPI) => {
     try {
-      let data = await axiosFetch.get(`movie/${id}?api_key=${api_key}&page=1`);
-      thunkAPI.dispatch(credits(data.data.id));
-      thunkAPI.dispatch(video(data.data.id));
+      let data = await axiosFetch.get(
+        `${type}/${id}?api_key=${api_key}&page=1`
+      );
+      thunkAPI.dispatch(credits({id: data.data.id, type}));
+      thunkAPI.dispatch(video({id: data.data.id, type}));
+      thunkAPI.dispatch(similar({id: data.data.id, type}));
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -28,21 +36,53 @@ export let detailMovie = createAsyncThunk(
   }
 );
 
-export let credits = createAsyncThunk('credits', async (id, thunkAPI) => {
-  try {
-    let data = await axiosFetch.get(
-      `movie/${id}/credits?api_key=${api_key}&page=1`
-    );
-    return data.data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+export let discoverMovie = createAsyncThunk(
+  'movie/discover',
+  async (_, thunkAPI) => {
+    try {
+      let {page, type} = thunkAPI.getState().movie.discoverVar;
+      let data = await axiosFetch.get(
+        `https://api.themoviedb.org/3/discover/${type}?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_watch_monetization_types=flatrate`
+      );
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
+);
 
-export let video = createAsyncThunk('video', async (id, thunkAPI) => {
+export let credits = createAsyncThunk(
+  'credits',
+  async ({id, type}, thunkAPI) => {
+    try {
+      let data = await axiosFetch.get(
+        `${type}/${id}/credits?api_key=${api_key}&page=1`
+      );
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export let similar = createAsyncThunk(
+  'similar',
+  async ({id, type}, thunkAPI) => {
+    try {
+      let data = await axiosFetch.get(
+        `${type}/${id}/similar?api_key=${api_key}&page=1`
+      );
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export let video = createAsyncThunk('video', async ({id, type}, thunkAPI) => {
   try {
     let data = await axiosFetch.get(
-      `movie/${id}/videos?api_key=${api_key}&language=en-US`
+      `${type}/${id}/videos?api_key=${api_key}&language=en-US`
     );
     return data.data;
   } catch (error) {
@@ -117,93 +157,129 @@ export let getTopRateTV = createAsyncThunk(
 let movies = createSlice({
   name: 'movies',
   initialState,
+  reducers: {
+    discoverVariable: (state, {payload}) => {
+      state.discoverVar = payload;
+    },
+  },
   extraReducers: {
     [getPopularMovie.pending]: (state) => {
-      state.isLoading = true;
+      state.moviePopular.isLoading = true;
     },
     [getPopularMovie.fulfilled]: (state, {payload}) => {
-      state.isLoading = false;
-      state.moviePopular = payload.results;
+      state.moviePopular.isLoading = false;
+      state.moviePopular.data = payload.results;
     },
     [getPopularMovie.rejected]: (state, {payload}) => {
-      state.isLoading = false;
+      state.moviePopular.isLoading = false;
       toast.error(payload);
     },
     [credits.pending]: (state) => {
-      state.isLoading = true;
+      state.detailsCredit.isLoading = true;
     },
     [credits.fulfilled]: (state, {payload}) => {
-      state.details = {...state.details, credits: payload.cast};
+      state.detailsCredit.isLoading = false;
+      state.detailsCredit.data = payload.cast;
     },
     [credits.rejected]: (state, {payload}) => {
+      state.detailsCredit.isLoading = false;
+      toast.error(payload);
+    },
+    [similar.pending]: (state) => {
+      state.detailsSimilar.isLoading = true;
+    },
+    [similar.fulfilled]: (state, {payload}) => {
+      state.detailsSimilar.isLoading = false;
+      state.detailsSimilar.data = payload.results;
+    },
+    [similar.rejected]: (state, {payload}) => {
+      state.detailsSimilar.isLoading = false;
       toast.error(payload);
     },
     [video.pending]: (state) => {
-      state.isLoading = true;
+      state.detailsVideo.isLoading = true;
     },
     [video.fulfilled]: (state, {payload}) => {
-      state.isLoading = false;
-      console.log(payload.results);
-      state.details = {...state.details, video: payload.results};
+      state.detailsVideo.isLoading = false;
+      state.detailsVideo.data = payload.results;
     },
     [video.rejected]: (state, {payload}) => {
-      state.isLoading = false;
+      state.detailsVideo.isLoading = false;
       toast.error(payload);
     },
     [getUpComingMovie.pending]: (state) => {
-      state.isLoading = true;
+      state.movieUpComing.isLoading = true;
     },
     [getUpComingMovie.fulfilled]: (state, {payload}) => {
-      state.isLoading = false;
-      state.movieUpComing = payload.results;
+      state.movieUpComing.isLoading = false;
+      state.movieUpComing.data = payload.results;
     },
     [getUpComingMovie.rejected]: (state, {payload}) => {
-      state.isLoading = false;
+      state.movieUpComing.isLoading = false;
       toast.error(payload);
     },
     [getPopularTV.pending]: (state) => {
-      state.isLoading = true;
+      state.tvPopular.isLoading = true;
     },
     [getPopularTV.fulfilled]: (state, {payload}) => {
-      state.isLoading = false;
-      state.tvPopular = payload.results;
+      state.tvPopular.isLoading = false;
+      state.tvPopular.data = payload.results;
     },
     [getPopularTV.rejected]: (state, {payload}) => {
-      state.isLoading = false;
+      state.tvPopular.isLoading = false;
       toast.error(payload);
     },
     [getTopRateMovie.pending]: (state) => {
-      state.isLoading = true;
+      state.tvTopRate.isLoading = true;
     },
     [getTopRateMovie.fulfilled]: (state, {payload}) => {
-      state.isLoading = false;
-      state.tvTopRate = payload.results;
+      state.tvTopRate.isLoading = false;
+      state.tvTopRate.data = payload.results;
     },
     [getTopRateMovie.rejected]: (state, {payload}) => {
-      state.isLoading = false;
+      state.tvTopRate.isLoading = false;
       toast.error(payload);
     },
     [getTopRateTV.pending]: (state) => {
-      state.isLoading = true;
+      state.movieTopRate.isLoading = true;
     },
     [getTopRateTV.fulfilled]: (state, {payload}) => {
-      state.isLoading = false;
-      state.movieTopRate = payload.results;
+      state.movieTopRate.isLoading = false;
+      state.movieTopRate.data = payload.results;
     },
     [getTopRateTV.rejected]: (state, {payload}) => {
-      state.isLoading = false;
+      state.movieTopRate.isLoading = false;
+      toast.error(payload);
+    },
+    [discoverMovie.pending]: (state) => {
+      state.discover.isLoading = true;
+    },
+    [discoverMovie.fulfilled]: (state, {payload}) => {
+      state.discover.isLoading = false;
+
+      if (state.discoverVar.page === 1) {
+        state.discover.data = payload.results;
+      } else {
+        state.discover.data = [...state.discover.data, ...payload.results];
+      }
+    },
+    [discoverMovie.rejected]: (state, {payload}) => {
+      state.discover.isLoading = false;
       toast.error(payload);
     },
     [detailMovie.pending]: (state) => {
-      state.isLoading = true;
+      state.details.isLoading = true;
     },
     [detailMovie.fulfilled]: (state, {payload}) => {
-      state.details = payload;
+      state.details.isLoading = false;
+      state.details.data = payload;
     },
     [detailMovie.rejected]: (state, {payload}) => {
+      state.details.isLoading = false;
       toast.error(payload);
     },
   },
 });
 
+export let {discoverVariable} = movies.actions;
 export default movies.reducer;

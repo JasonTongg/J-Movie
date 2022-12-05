@@ -50,6 +50,7 @@ export const Content = styled.div`
       outline: none;
       color: white;
       font-weight: bold;
+      cursor: pointer;
     }
 
     .red {

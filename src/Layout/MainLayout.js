@@ -4,9 +4,9 @@ import {Container} from './Style';
 import Header from '../Components/Header/Header';
 import Swiper from '../Components/Swiper/Swiper';
 import DetailHeader from '../Components/DetailHeader/DetailHeader';
+import ListHeader from '../Components/ListHeader/ListHeader';
 
 export default function MainLayout({type, children}) {
-  console.log(window.location.pathname === '/');
   return (
     <Container>
       <Header
@@ -15,7 +15,9 @@ export default function MainLayout({type, children}) {
             <Swiper></Swiper>
           ) : type === 'detail' ? (
             <DetailHeader></DetailHeader>
-          ) : null
+          ) : (
+            <ListHeader></ListHeader>
+          )
         }
       ></Header>
       {children}

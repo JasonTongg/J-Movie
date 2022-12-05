@@ -3,12 +3,27 @@ import {useSelector} from 'react-redux';
 import {Container, Content} from './Style';
 import {Swiper as Swipe, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper.min.css';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 export default function DetailHeader() {
-  let {details: data, isLoading} = useSelector((state) => state.movie);
+  let {data: credits, isLoading} = useSelector(
+    (state) => state.movie.detailsCredit
+  );
+  let {data, isLoading: detailLoading} = useSelector(
+    (state) => state.movie.details
+  );
 
-  if (isLoading) {
-    return <h1 style={{color: 'white'}}>loading....</h1>;
+  if (isLoading || detailLoading) {
+    return (
+      <Container>
+        <ClipLoader
+          color={'#ffffff'}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </Container>
+    );
   }
 
   return (
@@ -36,8 +51,8 @@ export default function DetailHeader() {
             spaceBetween={50}
             slidesPerView={(window.innerWidth / 250).toFixed(2)}
           >
-            {data.credits
-              .filter((item) => item.profile_path)
+            {credits
+              ?.filter((item) => item.profile_path)
               .map((item, i) => (
                 <SwiperSlide key={i}>
                   <div className="content">

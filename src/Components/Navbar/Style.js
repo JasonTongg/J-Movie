@@ -27,6 +27,7 @@ export const Nav = styled.nav`
       cursor: pointer;
       padding: 0.5rem;
       border: 2px solid transparent;
+      cursor: pointer;
 
       &:hover {
         border-bottom: 2px solid red;
