@@ -31,7 +31,11 @@ export default function DetailHeader() {
         <p>{data.overview}</p>
         <h3>Casts</h3>
         <div class="casts">
-          <Swipe grabCursor={true} spaceBetween={0} slidesPerView={5}>
+          <Swipe
+            grabCursor={true}
+            spaceBetween={50}
+            slidesPerView={(window.innerWidth / 250).toFixed(2)}
+          >
             {data.credits
               .filter((item) => item.profile_path)
               .map((item, i) => (

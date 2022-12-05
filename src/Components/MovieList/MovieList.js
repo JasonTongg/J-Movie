@@ -23,7 +23,11 @@ export default function MovieList({title, data}) {
         <button>View More</button>
       </Header>
 
-      <Swipe grabCursor={true} spaceBetween={10} slidesPerView={6}>
+      <Swipe
+        grabCursor={true}
+        spaceBetween={10}
+        slidesPerView={(window.innerWidth / 250).toFixed(2)}
+      >
         {data.map((item, i) => (
           <SwiperSlide key={i}>
             <div className="content" onClick={() => toDetails(item.id)}>

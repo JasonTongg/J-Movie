@@ -20,6 +20,7 @@ export let detailMovie = createAsyncThunk(
     try {
       let data = await axiosFetch.get(`movie/${id}?api_key=${api_key}&page=1`);
       thunkAPI.dispatch(credits(data.data.id));
+      thunkAPI.dispatch(video(data.data.id));
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -32,7 +33,17 @@ export let credits = createAsyncThunk('credits', async (id, thunkAPI) => {
     let data = await axiosFetch.get(
       `movie/${id}/credits?api_key=${api_key}&page=1`
     );
-    console.log(data.data);
+    return data.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export let video = createAsyncThunk('video', async (id, thunkAPI) => {
+  try {
+    let data = await axiosFetch.get(
+      `movie/${id}/videos?api_key=${api_key}&language=en-US`
+    );
     return data.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -122,10 +133,20 @@ let movies = createSlice({
       state.isLoading = true;
     },
     [credits.fulfilled]: (state, {payload}) => {
-      state.isLoading = false;
       state.details = {...state.details, credits: payload.cast};
     },
     [credits.rejected]: (state, {payload}) => {
+      toast.error(payload);
+    },
+    [video.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [video.fulfilled]: (state, {payload}) => {
+      state.isLoading = false;
+      console.log(payload.results);
+      state.details = {...state.details, video: payload.results};
+    },
+    [video.rejected]: (state, {payload}) => {
       state.isLoading = false;
       toast.error(payload);
     },
