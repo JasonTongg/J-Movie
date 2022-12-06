@@ -27,11 +27,11 @@ export default function Home() {
   );
 
   useEffect(() => {
-    dispatch(getUpComingMovie());
+    dispatch(getUpComingMovie(1));
     dispatch(getPopularMovie());
-    dispatch(getPopularTV());
-    dispatch(getTopRateMovie());
-    dispatch(getTopRateTV());
+    dispatch(getPopularTV(1));
+    dispatch(getTopRateMovie(1));
+    dispatch(getTopRateTV(1));
   }, [dispatch]);
 
   if (!upcoming && !topRateMovie && !popularTV && !topRateTV) {
@@ -44,18 +44,25 @@ export default function Home() {
         <MovieList
           title="UpComing Movie"
           data={{data: upcoming, loading: movieUpComingLoading}}
+          type="movie"
         />
         <MovieList
           title="Top Rated Movie"
-          data={{data: topRateMovie, loading: movieTopRateLoading}}
+          data={{
+            data: topRateMovie,
+            loading: movieTopRateLoading,
+          }}
+          type="movie"
         />
         <MovieList
           title="Popular TV Series"
           data={{data: popularTV, loading: tvPopularLoading}}
+          type="tv"
         />
         <MovieList
           title="Top Rated TV Series"
           data={{data: topRateTV, loading: tvTopRateLoading}}
+          type="tv"
         />
       </Container>
     </MainLayout>

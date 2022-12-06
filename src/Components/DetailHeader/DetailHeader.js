@@ -4,6 +4,7 @@ import {Container, Content} from './Style';
 import {Swiper as Swipe, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper.min.css';
 import ClipLoader from 'react-spinners/ClipLoader';
+import {Navigate} from 'react-router-dom';
 
 export default function DetailHeader() {
   let {data: credits, isLoading} = useSelector(
@@ -15,7 +16,7 @@ export default function DetailHeader() {
 
   if (isLoading || detailLoading) {
     return (
-      <Container>
+      <Container style={{justifyItems: 'center'}}>
         <ClipLoader
           color={'#ffffff'}
           size={150}
@@ -24,6 +25,15 @@ export default function DetailHeader() {
         />
       </Container>
     );
+  }
+
+  if (
+    !isLoading &&
+    !detailLoading &&
+    credits.length === 0 &&
+    Object.keys(data).length === 0
+  ) {
+    return <Navigate to="/404"></Navigate>;
   }
 
   return (
@@ -43,10 +53,10 @@ export default function DetailHeader() {
             <li key={item.id}>{item.name}</li>
           ))}
         </ul>
-        <p>{data.overview}</p>
+        <p>{data.overview.slice(0, 230)}...</p>
         <h3>Casts</h3>
         <div class="casts">
-          <Swipe
+          {/* <Swipe
             grabCursor={true}
             spaceBetween={50}
             slidesPerView={(window.innerWidth / 250).toFixed(2)}
@@ -68,7 +78,7 @@ export default function DetailHeader() {
                   </div>
                 </SwiperSlide>
               ))}
-          </Swipe>
+          </Swipe> */}
         </div>
       </Content>
     </Container>

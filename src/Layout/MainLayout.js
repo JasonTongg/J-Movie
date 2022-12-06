@@ -6,7 +6,7 @@ import Swiper from '../Components/Swiper/Swiper';
 import DetailHeader from '../Components/DetailHeader/DetailHeader';
 import ListHeader from '../Components/ListHeader/ListHeader';
 
-export default function MainLayout({type, children}) {
+export default function MainLayout({type, children, title}) {
   return (
     <Container>
       <Header
@@ -16,7 +16,7 @@ export default function MainLayout({type, children}) {
           ) : type === 'detail' ? (
             <DetailHeader></DetailHeader>
           ) : (
-            <ListHeader></ListHeader>
+            <ListHeader title={title}></ListHeader>
           )
         }
       ></Header>

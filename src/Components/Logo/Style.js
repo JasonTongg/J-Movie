@@ -8,10 +8,11 @@ export const Logo = styled.div`
   cursor: pointer;
 
   svg {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   h2 {
     margin: 0;
+    font-size: 2rem;
   }
 `;

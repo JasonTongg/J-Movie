@@ -15,6 +15,47 @@ export const Nav = styled.nav`
   box-sizing: border-box;
   width: 100%;
 
+  @media only screen and (max-width: 800px) {
+    justify-content: center;
+    padding-block: 2.5rem;
+  }
+
+  ol {
+    list-style: none;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 2rem 4rem;
+
+    @media only screen and (max-width: 800px) {
+      display: flex;
+    }
+
+    @media only screen and (max-width: 500px) {
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    li {
+      font-weight: bold;
+      cursor: pointer;
+      border: 4px solid transparent;
+      cursor: pointer;
+      font-size: 1.5rem;
+
+      &:hover,
+      &.active {
+        border-bottom: 10px solid #7a0000;
+      }
+    }
+  }
+
   ul {
     list-style: none;
     display: flex;
@@ -22,15 +63,20 @@ export const Nav = styled.nav`
     align-items: center;
     gap: 2rem;
 
+    @media only screen and (max-width: 800px) {
+      display: none;
+    }
+
     li {
       font-weight: bold;
       cursor: pointer;
-      padding: 0.5rem;
-      border: 2px solid transparent;
+      border: 4px solid transparent;
       cursor: pointer;
+      font-size: 1.5rem;
 
-      &:hover {
-        border-bottom: 2px solid red;
+      &:hover,
+      &.active {
+        border-bottom: 4px solid #7a0000;
       }
     }
   }

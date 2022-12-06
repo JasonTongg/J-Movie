@@ -8,16 +8,31 @@ export const SwiperContent = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  justify-items: flex-end;
+  justify-items: flex-start;
+  justify-content: center;
+  align-content: center;
   padding: 4rem;
   gap: 4rem;
 
+  @media only screen and (max-width: 800px) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  @media only screen and (max-width: 450px) {
+    padding: 2rem;
+  }
+
   img {
     width: 300px;
-    justify-self: flex-start;
+    justify-self: flex-end;
     border-radius: 40px;
+
+    @media only screen and (max-width: 800px) {
+      display: none;
+    }
   }
 `;
 
@@ -30,6 +45,10 @@ export const Content = styled.div`
   color: white;
   width: 70%;
 
+  @media only screen and (max-width: 1100px) {
+    width: 90%;
+  }
+
   h2,
   p {
     margin: 0;
@@ -38,11 +57,32 @@ export const Content = styled.div`
   h2 {
     font-size: 4rem;
     line-height: 4rem;
+
+    @media only screen and (max-width: 600px) {
+      font-size: 3rem;
+      line-height: 3rem;
+      text-align: center;
+    }
+  }
+
+  p {
+    @media only screen and (max-width: 600px) {
+      text-align: justify;
+    }
+    @media only screen and (max-width: 300px) {
+      display: none;
+    }
   }
 
   .buttons {
     display: flex;
     gap: 1rem;
+
+    @media only screen and (max-width: 350px) {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
 
     button {
       padding: 0.5rem 1.5rem;

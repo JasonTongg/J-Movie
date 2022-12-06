@@ -28,7 +28,7 @@ export const Container = styled.div`
     }
   }
 
-  .swiper-container:first-child {
-    padding: 2rem 8rem;
+  iframe {
+    resize: bold;
   }
 `;

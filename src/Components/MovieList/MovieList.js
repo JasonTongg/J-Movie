@@ -3,19 +3,20 @@ import {Container, Header} from './Style';
 import {Swiper as Swipe, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper.min.css';
 import {useNavigate} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {detailMovie} from '../../Redux/movies';
+
 import ClipLoader from 'react-spinners/ClipLoader';
 
-export default function MovieList({title, data}) {
+export default function MovieList({title, data, type}) {
   let navigate = useNavigate();
-  let dispatch = useDispatch();
+
   let dataa = data.data?.filter((item) => item.poster_path).slice(0, 10);
 
   let toDetails = (id) => {
-    console.log(id);
-    dispatch(detailMovie({id, type: dataa[0].first_air_date ? 'tv' : 'movie'}));
-    navigate('/details');
+    navigate(`/details/${type}/${id}`);
+  };
+
+  let showMore = () => {
+    navigate(`/list/${title}`);
   };
 
   if (data.loading) {
@@ -40,12 +41,12 @@ export default function MovieList({title, data}) {
     <Container>
       <Header>
         <h3>{title}</h3>
-        <button>View More</button>
+        <button onClick={showMore}>View More</button>
       </Header>
 
       <Swipe
         grabCursor={true}
-        spaceBetween={10}
+        spaceBetween={50}
         slidesPerView={(window.innerWidth / 250).toFixed(2)}
       >
         {dataa?.map((item, i) => (

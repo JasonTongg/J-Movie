@@ -2,10 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
-  max-height: 700px;
+  min-height: 100vh;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: 1fr 1fr;
   align-content: center;
   align-items: center;
   justify-content: center;
@@ -14,6 +13,8 @@ export const Container = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   gap: 4rem;
+  padding-top: 4rem;
+  padding: 4rem;
 
   img {
     justify-self: flex-end;
@@ -24,7 +25,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   color: white;
-  width: 70%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

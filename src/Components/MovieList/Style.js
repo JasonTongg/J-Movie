@@ -6,6 +6,10 @@ export const Container = styled.div`
   padding: 2rem 8rem;
   box-sizing: border-box;
 
+  @media only screen and (max-width: 1000px) {
+    padding: 2rem 4rem;
+  }
+
   .content {
     width: 200px;
     position: relative;

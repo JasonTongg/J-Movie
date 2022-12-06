@@ -2,39 +2,73 @@ import React from 'react';
 import {Nav} from './Style';
 import Logo from '../Logo/Logo';
 import {useNavigate} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {discoverVariable} from '../../Redux/movies';
 
 export default function Navbar() {
   let navigate = useNavigate();
-  let dispatch = useDispatch();
-
-  let disp = (type) => {
-    dispatch(discoverVariable({page: 1, type}));
-  };
 
   return (
     <Nav>
       <Logo onClick={() => navigate('/')} />
       <ul>
-        <li onClick={() => navigate('/')}>Home</li>
         <li
           onClick={() => {
-            disp('movie');
-            navigate('/List');
+            navigate('/');
           }}
+          className={window.location.pathname === '/' && 'active'}
+        >
+          Home
+        </li>
+        <li
+          onClick={() => {
+            navigate('/List/movie');
+          }}
+          className={
+            window.location.pathname.toLowerCase() === '/list/movie' && 'active'
+          }
         >
           Movies
         </li>
         <li
           onClick={() => {
-            disp('tv');
-            navigate('/List');
+            navigate('/List/tv');
           }}
+          className={
+            window.location.pathname.toLowerCase() === '/list/tv' && 'active'
+          }
         >
           TV Series
         </li>
       </ul>
+      <ol className="mobileNavbar">
+        <li
+          onClick={() => {
+            navigate('/');
+          }}
+          className={window.location.pathname === '/' && 'active'}
+        >
+          Home
+        </li>
+        <li
+          onClick={() => {
+            navigate('/List/movie');
+          }}
+          className={
+            window.location.pathname.toLowerCase() === '/list/movie' && 'active'
+          }
+        >
+          Movies
+        </li>
+        <li
+          onClick={() => {
+            navigate('/List/tv');
+          }}
+          className={
+            window.location.pathname.toLowerCase() === '/list/tv' && 'active'
+          }
+        >
+          TV Series
+        </li>
+      </ol>
     </Nav>
   );
 }

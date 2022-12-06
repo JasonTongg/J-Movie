@@ -16,6 +16,7 @@
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.7",
     "react-toastify": "^9.1.1",
+    "react-undraw-illustrations": "^2.0.3",
     "styled-components": "^5.3.6",
     "swiper": "^6.8.4",
     "web-vitals": "^2.1.4"

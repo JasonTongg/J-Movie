@@ -6,6 +6,10 @@ export const Container = styled.div`
   padding: 2rem 8rem;
   align-items: center;
 
+  @media only screen and (max-width: 500px) {
+    padding: 2rem;
+  }
+
   .more {
     padding: 0.5rem 1rem;
     border: 1px solid white;
@@ -18,7 +22,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Search = styled.div`
+export const Search = styled.form`
   display: flex;
 
   input {
@@ -63,7 +67,6 @@ export const Item = styled.div`
 
   img {
     width: 100%;
-    height: 350px;
     object-fit: cover;
     border-radius: 15px;
   }
