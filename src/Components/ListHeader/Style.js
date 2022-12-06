@@ -7,6 +7,10 @@ export const Container = styled.div`
   align-items: flex-end;
   justify-content: center;
 
+  @media only screen and (max-width: 320px) {
+    height: 200px;
+  }
+
   h3 {
     color: white;
     font-size: 2rem;

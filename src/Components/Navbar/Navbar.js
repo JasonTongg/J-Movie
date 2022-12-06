@@ -20,16 +20,6 @@ export default function Navbar() {
         </li>
         <li
           onClick={() => {
-            navigate('/List/movie');
-          }}
-          className={
-            window.location.pathname.toLowerCase() === '/list/movie' && 'active'
-          }
-        >
-          Movies
-        </li>
-        <li
-          onClick={() => {
             navigate('/List/tv');
           }}
           className={
@@ -37,6 +27,16 @@ export default function Navbar() {
           }
         >
           TV Series
+        </li>
+        <li
+          onClick={() => {
+            navigate('/List/movie');
+          }}
+          className={
+            window.location.pathname.toLowerCase() === '/list/movie' && 'active'
+          }
+        >
+          Movies
         </li>
       </ul>
       <ol className="mobileNavbar">
@@ -50,16 +50,6 @@ export default function Navbar() {
         </li>
         <li
           onClick={() => {
-            navigate('/List/movie');
-          }}
-          className={
-            window.location.pathname.toLowerCase() === '/list/movie' && 'active'
-          }
-        >
-          Movies
-        </li>
-        <li
-          onClick={() => {
             navigate('/List/tv');
           }}
           className={
@@ -67,6 +57,16 @@ export default function Navbar() {
           }
         >
           TV Series
+        </li>
+        <li
+          onClick={() => {
+            navigate('/List/movie');
+          }}
+          className={
+            window.location.pathname.toLowerCase() === '/list/movie' && 'active'
+          }
+        >
+          Movies
         </li>
       </ol>
     </Nav>

@@ -35,11 +35,11 @@ export const Nav = styled.nav`
 
     @media only screen and (max-width: 800px) {
       display: flex;
+      padding: 2rem;
     }
 
-    @media only screen and (max-width: 500px) {
-      flex-direction: column;
-      justify-content: center;
+    @media only screen and (max-width: 440px) {
+      padding: 2rem 1rem;
     }
 
     li {
@@ -49,9 +49,18 @@ export const Nav = styled.nav`
       cursor: pointer;
       font-size: 1.5rem;
 
+      @media only screen and (max-width: 440px) {
+        font-size: 1.2rem;
+      }
+
+      @media only screen and (max-width: 370px) {
+        font-size: 1rem;
+        text-align: center;
+      }
+
       &:hover,
       &.active {
-        border-bottom: 10px solid #7a0000;
+        border-bottom: 4px solid #7a0000;
       }
     }
   }

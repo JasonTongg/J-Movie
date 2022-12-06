@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(500px, 1fr) minmax(500px, 1.5fr);
   align-content: center;
   align-items: center;
   justify-content: center;
@@ -16,10 +16,36 @@ export const Container = styled.div`
   padding-top: 4rem;
   padding: 4rem;
 
-  img {
+  @media only screen and (max-width: 940px) {
+    grid-template-columns: minmax(500px, 1fr);
+    justify-items: center;
+  }
+
+  @media only screen and (max-width: 600px) {
+    min-height: 0;
+    height: fit-content;
+  }
+
+  @media only screen and (max-width: 350px) {
+    height: 750px;
+  }
+
+  @media only screen and (max-width: 300px) {
+    height: 500px;
+  }
+
+  .poster {
     justify-self: flex-end;
     width: 300px;
     border-radius: 40px;
+
+    @media only screen and (max-width: 940px) {
+      justify-self: center;
+    }
+
+    @media only screen and (max-width: 600px) {
+      display: none;
+    }
   }
 `;
 
@@ -31,6 +57,12 @@ export const Content = styled.div`
   align-items: flex-start;
   justify-content: center;
   gap: 1.5rem;
+  padding: 2rem;
+  box-sizing: border-box;
+
+  @media only screen and (max-width: 600px) {
+    width: 100vw;
+  }
 
   h2,
   p {
@@ -40,6 +72,27 @@ export const Content = styled.div`
   h2 {
     font-size: 4rem;
     line-height: 4rem;
+    text-align: center;
+
+    @media only screen and (max-width: 500px) {
+      font-size: 3rem;
+      line-height: 3.2rem;
+    }
+
+    @media only screen and (max-width: 300px) {
+      font-size: 2rem;
+      line-height: 2.1rem;
+    }
+  }
+
+  p {
+    @media only screen and (max-width: 400px) {
+      text-align: justify;
+    }
+
+    @media only screen and (max-width: 300px) {
+      display: none;
+    }
   }
 
   ul {
@@ -51,6 +104,11 @@ export const Content = styled.div`
     margin: 0;
     gap: 1rem;
     flex-wrap: wrap;
+    width: 100%;
+
+    @media only screen and (max-width: 300px) {
+      justify-content: center;
+    }
 
     li {
       padding: 0.3rem 1rem;
@@ -62,8 +120,19 @@ export const Content = styled.div`
     }
   }
 
+  h3 {
+    @media only screen and (max-width: 400px) {
+      display: none;
+    }
+  }
+
   .casts {
     width: 100%;
+
+    @media only screen and (max-width: 400px) {
+      display: none;
+    }
+
     .content {
       width: 80px;
       position: relative;

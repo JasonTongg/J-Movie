@@ -14,6 +14,12 @@ export const Container = styled.div`
     width: 100%;
     margin-bottom: 1rem;
     cursor: grab;
+
+    h3 {
+      @media only screen and (max-width: 400px) {
+        font-size: 1.1rem;
+      }
+    }
   }
 
   h4 {
@@ -30,5 +36,9 @@ export const Container = styled.div`
 
   iframe {
     resize: bold;
+  }
+
+  .sc-gswNZR {
+    padding-inline: 0;
   }
 `;

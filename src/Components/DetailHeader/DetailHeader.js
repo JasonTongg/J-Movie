@@ -45,6 +45,7 @@ export default function DetailHeader() {
       <img
         src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
         alt={data.original_title || data.original_name}
+        className="poster"
       />
       <Content>
         <h2>{data.original_title}</h2>
@@ -56,10 +57,18 @@ export default function DetailHeader() {
         <p>{data.overview.slice(0, 230)}...</p>
         <h3>Casts</h3>
         <div class="casts">
-          {/* <Swipe
+          <Swipe
             grabCursor={true}
-            spaceBetween={50}
-            slidesPerView={(window.innerWidth / 250).toFixed(2)}
+            spaceBetween={10}
+            slidesPerView={
+              window.innerWidth > 940
+                ? ((window.innerWidth - 128) / 250).toFixed(2)
+                : window.innerWidth > 600
+                ? ((window.innerWidth - 128) / 150).toFixed(2)
+                : window.innerWidth > 450
+                ? ((window.innerWidth - 128) / 100).toFixed(2)
+                : ((window.innerWidth - 128) / 80).toFixed(2)
+            }
           >
             {credits
               ?.filter((item) => item.profile_path)
@@ -78,7 +87,7 @@ export default function DetailHeader() {
                   </div>
                 </SwiperSlide>
               ))}
-          </Swipe> */}
+          </Swipe>
         </div>
       </Content>
     </Container>

@@ -29,7 +29,7 @@ export default function Details() {
 
   return (
     <MainLayout type="detail">
-      <Container>
+      <Container style={{paddingInline: '2em'}}>
         <Swipe grabCursor={true} spaceBetween={10} slidesPerView={1}>
           {videos?.map((item, index) => (
             <SwiperSlide key={index}>
@@ -77,6 +77,7 @@ export default function Details() {
           title="Similar"
           data={{data: similar, loading: similarLoading}}
           type={type}
+          style={{paddingInline: '0 !important'}}
         />
       </Container>
     </MainLayout>

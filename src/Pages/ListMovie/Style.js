@@ -24,6 +24,7 @@ export const Container = styled.div`
 
 export const Search = styled.form`
   display: flex;
+  width: 100%;
 
   input {
     background-color: rgba(255, 255, 255, 0.1);
@@ -33,6 +34,10 @@ export const Search = styled.form`
     color: white;
     outline: none;
     width: 300px;
+
+    @media only screen and (max-width: 400px) {
+      width: 100%;
+    }
   }
 
   button {

@@ -63,6 +63,11 @@ export const Content = styled.div`
       line-height: 3rem;
       text-align: center;
     }
+
+    @media only screen and (max-width: 400px) {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
   }
 
   p {

@@ -10,13 +10,23 @@ export const Container = styled.div`
     padding: 2rem 4rem;
   }
 
+  @media only screen and (max-width: 500px) {
+    padding: 2rem 2rem;
+  }
+
+  .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .content {
     width: 200px;
     position: relative;
     cursor: pointer;
 
     img {
-      width: 200px;
+      width: 100%;
       border-radius: 30px;
     }
 
@@ -54,6 +64,10 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
+
+  @media only screen and (max-width: 350px) {
+    font-size: 0.8rem;
+  }
 
   button {
     padding: 0.5rem 1.2rem;

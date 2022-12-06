@@ -16,16 +16,19 @@ export const Footer = styled.footer`
     padding-bottom: 150px;
   }
 
-  @media only screen and (max-width: 500px) {
-    padding-bottom: 300px;
-  }
-
   svg {
     font-size: 4rem;
+
+    @media only screen and (max-width: 300px) {
+      font-size: 3rem;
+    }
   }
 
   h2 {
     font-size: 3rem;
+    @media only screen and (max-width: 300px) {
+      font-size: 2rem;
+    }
   }
 `;
 
