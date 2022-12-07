@@ -11,10 +11,8 @@ import {
   getTopRateTV,
   search,
 } from '../../Redux/movies';
-import ClipLoader from 'react-spinners/ClipLoader';
 import {useParams} from 'react-router-dom';
 import {UndrawMovieNight} from 'react-undraw-illustrations';
-import {Buttons} from '../../Components/WhiteButton/Style';
 import Skeleton from '@mui/material/Skeleton';
 
 export default function ListMovie() {
@@ -173,7 +171,7 @@ export default function ListMovie() {
         </Search>
         {loading ? (
           <List style={{gap: '1rem'}}>
-            {Array.from({length: 20}).map(() => (
+            {Array.from({length: 20}).map((_, idx) => (
               <Skeleton
                 variant="rounded"
                 height={290}
@@ -183,6 +181,7 @@ export default function ListMovie() {
                 }}
                 sx={{bgcolor: 'grey.900'}}
                 animation="wave"
+                key={idx}
               />
             ))}
           </List>
@@ -190,8 +189,8 @@ export default function ListMovie() {
           <List>
             {data
               ?.filter((item) => item.poster_path)
-              ?.map((item) => (
-                <Item onClick={() => toDetails(item.id)}>
+              ?.map((item, idx) => (
+                <Item onClick={() => toDetails(item.id)} key={idx}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                     alt={item.original_name || item.original_title}

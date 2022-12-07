@@ -40,7 +40,6 @@ let user = createSlice({
   initialState,
   extraReducers: {
     [requestSession.fulfilled]: (state, {payload}) => {
-      console.log(payload);
       state.session_id = payload;
     },
     [requestSession.rejected]: (_, {payload}) => {

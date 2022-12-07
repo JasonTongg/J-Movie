@@ -3,7 +3,6 @@ import {Container, Header} from './Style';
 import {Swiper as Swipe, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper.min.css';
 import {useNavigate} from 'react-router-dom';
-import ClipLoader from 'react-spinners/ClipLoader';
 import Buttons from '../WhiteButton/Button';
 import Skeleton from '@mui/material/Skeleton';
 
@@ -14,6 +13,7 @@ export default function MovieList({title, data, type}) {
 
   let toDetails = (id) => {
     navigate(`/details/${type}/${id}`);
+    window.scrollTo(0, 0);
   };
 
   let showMore = () => {
@@ -32,8 +32,8 @@ export default function MovieList({title, data, type}) {
           spaceBetween={window.innerWidth > 500 ? 40 : 20}
           slidesPerView={((window.innerWidth - 128) / 250).toFixed(2)}
         >
-          {Array.from({length: 6}).map((item) => (
-            <SwiperSlide>
+          {Array.from({length: 6}).map((_, idx) => (
+            <SwiperSlide key={idx}>
               <Skeleton
                 variant="rounded"
                 width={300}

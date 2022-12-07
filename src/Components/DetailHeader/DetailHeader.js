@@ -6,7 +6,7 @@ import 'swiper/swiper.min.css';
 import ClipLoader from 'react-spinners/ClipLoader';
 import {Navigate} from 'react-router-dom';
 import profile from '../../Assets/profile_dummy.png';
-import infoModal from '../InfoModal/InfoModal';
+// import infoModal from '../InfoModal/InfoModal';
 
 export default function DetailHeader() {
   let {data: credits, isLoading} = useSelector(
@@ -58,8 +58,8 @@ export default function DetailHeader() {
           ))}
         </ul>
         <p>{data.overview}</p>
-        <h3>{credits && 'Casts'}</h3>
-        <div class="casts">
+        <h3>{credits ? 'Casts' : ''}</h3>
+        <div className="casts">
           <Swipe
             grabCursor={true}
             spaceBetween={10}

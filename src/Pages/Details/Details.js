@@ -7,7 +7,6 @@ import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 import {CgArrowsExchangeAlt} from 'react-icons/cg';
 import MovieList from '../../Components/MovieList/MovieList';
-import ClipLoader from 'react-spinners/ClipLoader';
 import {useParams} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {detailMovie} from '../../Redux/movies';

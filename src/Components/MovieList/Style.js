@@ -22,9 +22,12 @@ export const Container = styled.div`
   }
 
   .content {
-    // width: 200px;
     position: relative;
     cursor: pointer;
+
+    // @media only screen and (max-width: 500px) {
+    //   width: 250px;
+    // }
 
     img {
       width: 100%;

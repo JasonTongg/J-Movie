@@ -281,7 +281,6 @@ let movies = createSlice({
     [getTopRateTV.fulfilled]: (state, {payload}) => {
       state.tvTopRate.isLoading = false;
       if (payload.page === 1) {
-        console.log(payload);
         state.tvTopRate.data = payload.data.results;
       } else {
         state.tvTopRate.data = [

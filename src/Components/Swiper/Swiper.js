@@ -6,7 +6,6 @@ import {SwiperContent, Content} from './Style';
 import {useNavigate} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import ClipLoader from 'react-spinners/ClipLoader';
-import {Buttons} from '../WhiteButton/Style';
 import {video} from '../../Redux/movies';
 
 export default function Swiper() {
@@ -22,7 +21,6 @@ export default function Swiper() {
   };
 
   let fetchVideo = (id) => {
-    console.log('jalan');
     dispatch(video({id, type: 'movie'}));
   };
 
