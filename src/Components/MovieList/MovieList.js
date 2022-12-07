@@ -46,8 +46,8 @@ export default function MovieList({title, data, type}) {
 
       <Swipe
         grabCursor={true}
-        spaceBetween={window.innerWidth > 500 ? 50 : 20}
-        slidesPerView={(window.innerWidth / 250).toFixed(2)}
+        spaceBetween={window.innerWidth > 500 ? 30 : 20}
+        slidesPerView={((window.innerWidth - 128) / 250).toFixed(2)}
       >
         {dataa?.map((item, i) => (
           <SwiperSlide key={i}>

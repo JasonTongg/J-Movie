@@ -211,6 +211,7 @@ let movies = createSlice({
     [credits.fulfilled]: (state, {payload}) => {
       state.detailsCredit.isLoading = false;
       state.detailsCredit.data = payload.cast;
+      console.log(payload);
     },
     [credits.rejected]: (state, {payload}) => {
       state.detailsCredit.isLoading = false;
@@ -274,12 +275,13 @@ let movies = createSlice({
       state.tvPopular.isLoading = false;
       toast.error(payload);
     },
-    [getTopRateMovie.pending]: (state) => {
+    [getTopRateTV.pending]: (state) => {
       state.tvTopRate.isLoading = true;
     },
-    [getTopRateMovie.fulfilled]: (state, {payload}) => {
+    [getTopRateTV.fulfilled]: (state, {payload}) => {
       state.tvTopRate.isLoading = false;
       if (payload.page === 1) {
+        console.log(payload);
         state.tvTopRate.data = payload.data.results;
       } else {
         state.tvTopRate.data = [
@@ -288,14 +290,14 @@ let movies = createSlice({
         ];
       }
     },
-    [getTopRateMovie.rejected]: (state, {payload}) => {
+    [getTopRateTV.rejected]: (state, {payload}) => {
       state.tvTopRate.isLoading = false;
       toast.error(payload);
     },
-    [getTopRateTV.pending]: (state) => {
+    [getTopRateMovie.pending]: (state) => {
       state.movieTopRate.isLoading = true;
     },
-    [getTopRateTV.fulfilled]: (state, {payload}) => {
+    [getTopRateMovie.fulfilled]: (state, {payload}) => {
       state.movieTopRate.isLoading = false;
       if (payload.page === 1) {
         state.movieTopRate.data = payload.data.results;
@@ -306,7 +308,7 @@ let movies = createSlice({
         ];
       }
     },
-    [getTopRateTV.rejected]: (state, {payload}) => {
+    [getTopRateMovie.rejected]: (state, {payload}) => {
       state.movieTopRate.isLoading = false;
       toast.error(payload);
     },

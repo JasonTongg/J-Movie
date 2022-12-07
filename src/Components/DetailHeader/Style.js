@@ -70,13 +70,13 @@ export const Content = styled.div`
   }
 
   h2 {
-    font-size: 4rem;
-    line-height: 4rem;
-    text-align: center;
+    font-size: 3rem;
+    line-height: 3.2rem;
 
     @media only screen and (max-width: 500px) {
       font-size: 3rem;
       line-height: 3.2rem;
+      text-align: center;
     }
 
     @media only screen and (max-width: 300px) {
@@ -141,6 +141,8 @@ export const Content = styled.div`
       img {
         width: 80px;
         border-radius: 20px;
+        height: 120px;
+        object-fit: cover;
       }
 
       .posterOverlay {

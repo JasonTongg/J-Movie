@@ -5,6 +5,8 @@ import {Swiper as Swipe, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper.min.css';
 import ClipLoader from 'react-spinners/ClipLoader';
 import {Navigate} from 'react-router-dom';
+import profile from '../../Assets/profile_dummy.png';
+import infoModal from '../InfoModal/InfoModal';
 
 export default function DetailHeader() {
   let {data: credits, isLoading} = useSelector(
@@ -42,20 +44,21 @@ export default function DetailHeader() {
         backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), black), url("https://image.tmdb.org/t/p/original${data.backdrop_path}")`,
       }}
     >
+      <infoModal></infoModal>
       <img
         src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
         alt={data.original_title || data.original_name}
         className="poster"
       />
       <Content>
-        <h2>{data.original_title}</h2>
+        <h2>{data.original_title || data.original_name}</h2>
         <ul>
           {data.genres.map((item) => (
             <li key={item.id}>{item.name}</li>
           ))}
         </ul>
-        <p>{data.overview.slice(0, 230)}...</p>
-        <h3>Casts</h3>
+        <p>{data.overview}</p>
+        <h3>{credits && 'Casts'}</h3>
         <div class="casts">
           <Swipe
             grabCursor={true}
@@ -70,23 +73,25 @@ export default function DetailHeader() {
                 : ((window.innerWidth - 128) / 80).toFixed(2)
             }
           >
-            {credits
-              ?.filter((item) => item.profile_path)
-              .map((item, i) => (
-                <SwiperSlide key={i}>
-                  <div className="content">
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${item.profile_path}`}
-                      alt={item.original_name}
-                      key={item.id}
-                      className="cast"
-                    />
-                    <div className="posterOverlay">
-                      <h3>{item.original_title || item.original_name}</h3>
-                    </div>
+            {credits.map((item, i) => (
+              <SwiperSlide key={i}>
+                <div className="content">
+                  <img
+                    src={
+                      item.profile_path
+                        ? `https://image.tmdb.org/t/p/w500${item.profile_path}`
+                        : profile
+                    }
+                    alt={item.original_name}
+                    key={item.id}
+                    className="cast"
+                  />
+                  <div className="posterOverlay">
+                    <h3>{item.original_title || item.original_name}</h3>
                   </div>
-                </SwiperSlide>
-              ))}
+                </div>
+              </SwiperSlide>
+            ))}
           </Swipe>
         </div>
       </Content>

@@ -27,6 +27,10 @@ export default function Details() {
     dispatch(detailMovie({id, type}));
   }, [id, type, dispatch]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <MainLayout type="detail">
       <Container style={{paddingInline: '2em'}}>
