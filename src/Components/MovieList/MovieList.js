@@ -3,8 +3,9 @@ import {Container, Header} from './Style';
 import {Swiper as Swipe, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper.min.css';
 import {useNavigate} from 'react-router-dom';
-
 import ClipLoader from 'react-spinners/ClipLoader';
+import Buttons from '../WhiteButton/Button';
+import Skeleton from '@mui/material/Skeleton';
 
 export default function MovieList({title, data, type}) {
   let navigate = useNavigate();
@@ -24,15 +25,28 @@ export default function MovieList({title, data, type}) {
       <Container>
         <Header>
           <h3>{title}</h3>
-          <button>View More</button>
+          <Buttons>View More</Buttons>
         </Header>
-
-        <ClipLoader
-          color={'#ffffff'}
-          size={150}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
+        <Swipe
+          grabCursor={true}
+          spaceBetween={window.innerWidth > 500 ? 40 : 20}
+          slidesPerView={((window.innerWidth - 128) / 250).toFixed(2)}
+        >
+          {Array.from({length: 6}).map((item) => (
+            <SwiperSlide>
+              <Skeleton
+                variant="rounded"
+                width={300}
+                height={290}
+                style={{
+                  borderRadius: '30px',
+                }}
+                sx={{bgcolor: 'grey.900'}}
+                animation="wave"
+              />
+            </SwiperSlide>
+          ))}
+        </Swipe>
       </Container>
     );
   }
@@ -41,12 +55,12 @@ export default function MovieList({title, data, type}) {
     <Container>
       <Header>
         <h3>{title}</h3>
-        <button onClick={showMore}>View More</button>
+        <Buttons action={showMore}>View More</Buttons>
       </Header>
 
       <Swipe
         grabCursor={true}
-        spaceBetween={window.innerWidth > 500 ? 30 : 20}
+        spaceBetween={window.innerWidth > 500 ? 40 : 20}
         slidesPerView={((window.innerWidth - 128) / 250).toFixed(2)}
       >
         {dataa?.map((item, i) => (

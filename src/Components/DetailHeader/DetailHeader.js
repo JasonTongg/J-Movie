@@ -18,7 +18,7 @@ export default function DetailHeader() {
 
   if (isLoading || detailLoading) {
     return (
-      <Container style={{justifyItems: 'center'}}>
+      <Container style={{justifyItems: 'center', gridTemplateColumns: '1fr'}}>
         <ClipLoader
           color={'#ffffff'}
           size={150}
@@ -44,7 +44,7 @@ export default function DetailHeader() {
         backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), black), url("https://image.tmdb.org/t/p/original${data.backdrop_path}")`,
       }}
     >
-      <infoModal></infoModal>
+      {/* <infoModal></infoModal> */}
       <img
         src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
         alt={data.original_title || data.original_name}

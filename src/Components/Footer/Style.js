@@ -30,6 +30,10 @@ export const Footer = styled.footer`
       font-size: 2rem;
     }
   }
+
+  li:hover {
+    color: #7a0000;
+  }
 `;
 
 export const List = styled.div`

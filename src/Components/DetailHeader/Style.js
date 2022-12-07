@@ -1,4 +1,14 @@
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+
+let show = keyframes`
+  from{
+    transform: translateY(-30px);
+  }
+  to{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+`;
 
 export const Container = styled.div`
   width: 100%;
@@ -13,7 +23,6 @@ export const Container = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   gap: 4rem;
-  padding-top: 4rem;
   padding: 4rem;
 
   @media only screen and (max-width: 940px) {
@@ -38,6 +47,8 @@ export const Container = styled.div`
     justify-self: flex-end;
     width: 300px;
     border-radius: 40px;
+    opacity: 0;
+    animation: ${show} 0.5s forwards 0s;
 
     @media only screen and (max-width: 940px) {
       justify-self: center;
@@ -72,6 +83,8 @@ export const Content = styled.div`
   h2 {
     font-size: 3rem;
     line-height: 3.2rem;
+    opacity: 0;
+    animation: ${show} 0.5s forwards 0.2s;
 
     @media only screen and (max-width: 500px) {
       font-size: 3rem;
@@ -86,6 +99,8 @@ export const Content = styled.div`
   }
 
   p {
+    opacity: 0;
+    animation: ${show} 0.5s forwards 0.6s;
     @media only screen and (max-width: 400px) {
       text-align: justify;
     }
@@ -105,6 +120,8 @@ export const Content = styled.div`
     gap: 1rem;
     flex-wrap: wrap;
     width: 100%;
+    opacity: 0;
+    animation: ${show} 0.5s forwards 0.4s;
 
     @media only screen and (max-width: 300px) {
       justify-content: center;
@@ -121,6 +138,8 @@ export const Content = styled.div`
   }
 
   h3 {
+    opacity: 0;
+    animation: ${show} 0.5s forwards 0.8s;
     @media only screen and (max-width: 400px) {
       display: none;
     }
@@ -128,6 +147,8 @@ export const Content = styled.div`
 
   .casts {
     width: 100%;
+    opacity: 0;
+    animation: ${show} 0.5s forwards 0.8s;
 
     @media only screen and (max-width: 400px) {
       display: none;

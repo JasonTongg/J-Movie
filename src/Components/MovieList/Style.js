@@ -18,10 +18,11 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 10px !important;
   }
 
   .content {
-    width: 200px;
+    // width: 200px;
     position: relative;
     cursor: pointer;
 
@@ -67,15 +68,5 @@ export const Header = styled.div`
 
   @media only screen and (max-width: 350px) {
     font-size: 0.8rem;
-  }
-
-  button {
-    padding: 0.5rem 1.2rem;
-    border-radius: 50px;
-    border: 1px solid white;
-    background-color: transparent;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
   }
 `;

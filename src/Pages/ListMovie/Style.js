@@ -14,11 +14,19 @@ export const Container = styled.div`
     padding: 0.5rem 1rem;
     border: 1px solid white;
     color: white;
-    font-weight: bold;
-    width: fit-content;
-    background-color: transparent;
+    font-size: 1.1rem;
     border-radius: 100px;
+    background-color: transparent;
+    outline: none;
+    transition: all 0.5s ease-out;
     cursor: pointer;
+    font-weight: bold;
+
+    &:hover {
+      background-color: white;
+      color: black !important;
+      transform: scale(1.1);
+    }
   }
 `;
 
@@ -42,13 +50,22 @@ export const Search = styled.form`
 
   button {
     border-radius: 50px;
-    background: red;
+    background: #7a0000;
     color: white;
     border: none;
     outline: none;
     padding: 0.5rem 1rem;
     transform: translateX(-20px);
     cursor: pointer;
+    transition: all 0.3s ease-out;
+    font-weight: bold;
+
+    &:hover {
+      background-color: black;
+      color: #7a0000;
+      transform: scale(1.1) translateX(-20px);
+      border: 1px solid #7a0000;
+    }
   }
 `;
 

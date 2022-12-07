@@ -46,8 +46,8 @@ export const Nav = styled.nav`
       font-weight: bold;
       cursor: pointer;
       border: 4px solid transparent;
-      cursor: pointer;
       font-size: 1.5rem;
+      transition: all 0.3s ease-out;
 
       @media only screen and (max-width: 440px) {
         font-size: 1.2rem;
@@ -82,6 +82,7 @@ export const Nav = styled.nav`
       border: 4px solid transparent;
       cursor: pointer;
       font-size: 1.5rem;
+      transition: all 0.3s ease-out;
 
       &:hover,
       &.active {

@@ -4,13 +4,16 @@ import {Swiper as Swipe, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper.min.css';
 import {SwiperContent, Content} from './Style';
 import {useNavigate} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import ClipLoader from 'react-spinners/ClipLoader';
+import {Buttons} from '../WhiteButton/Style';
+import {video} from '../../Redux/movies';
 
 export default function Swiper() {
   let {data, isLoading} = useSelector((state) => state.movie.moviePopular);
   data = data.slice(0, 4);
   let navigate = useNavigate();
+  let dispatch = useDispatch();
 
   SwiperCore.use([Autoplay]);
 
@@ -18,12 +21,22 @@ export default function Swiper() {
     navigate(`/details/movie/${id}`);
   };
 
+  let fetchVideo = (id) => {
+    console.log('jalan');
+    dispatch(video({id, type: 'movie'}));
+  };
+
   if (isLoading) {
     return (
       <Swipe grabCursor={true} spaceBetween={0} slidesPerView={1}>
         <SwiperSlide>
           <SwiperContent
-            style={{width: '100%', height: '700px', justifyItems: 'center'}}
+            style={{
+              width: '100%',
+              height: '700px',
+              justifyItems: 'center',
+              gridTemplateColumns: '1fr',
+            }}
           >
             <ClipLoader
               color={'#ffffff'}
@@ -49,30 +62,35 @@ export default function Swiper() {
     >
       {data.map((item, i) => (
         <SwiperSlide key={i}>
-          <SwiperContent
-            style={{
-              backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), black), url(https://image.tmdb.org/t/p/original${item.backdrop_path})`,
-            }}
-          >
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-              alt={item.title}
-            />
-            <Content>
-              <h2>{item.original_title}</h2>
-              <p>
-                {window.innerWidth > 600
-                  ? item.overview
-                  : item.overview.slice(0, 200) + '...'}
-              </p>
-              <div className="buttons">
-                <button className="red" onClick={() => toDetails(item.id)}>
-                  Watch Now
-                </button>
-                <button className="white">Watch Later</button>
-              </div>
-            </Content>
-          </SwiperContent>
+          {({isActive}) => (
+            <SwiperContent
+              style={{
+                backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), black), url(https://image.tmdb.org/t/p/original${item.backdrop_path})`,
+              }}
+              className={isActive ? 'active' : ''}
+            >
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+                alt={item.title}
+              />
+              <Content className={isActive ? 'active' : ''}>
+                <h2>{item.original_title}</h2>
+                <p>
+                  {window.innerWidth > 600
+                    ? item.overview
+                    : item.overview.slice(0, 200) + '...'}
+                </p>
+                <div className="buttons">
+                  <button className="red" onClick={() => toDetails(item.id)}>
+                    Watch Now
+                  </button>
+                  <button className="white" onClick={() => fetchVideo(item.id)}>
+                    Watch Trailer
+                  </button>
+                </div>
+              </Content>
+            </SwiperContent>
+          )}
         </SwiperSlide>
       ))}
     </Swipe>

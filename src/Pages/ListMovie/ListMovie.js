@@ -14,6 +14,8 @@ import {
 import ClipLoader from 'react-spinners/ClipLoader';
 import {useParams} from 'react-router-dom';
 import {UndrawMovieNight} from 'react-undraw-illustrations';
+import {Buttons} from '../../Components/WhiteButton/Style';
+import Skeleton from '@mui/material/Skeleton';
 
 export default function ListMovie() {
   let {data: discoverData, isLoading} = useSelector(
@@ -70,7 +72,9 @@ export default function ListMovie() {
   let navigate = useNavigate();
 
   let toDetails = (id) => {
-    navigate(`/details/${type}/${id}`);
+    navigate(
+      `/details/${type.toLowerCase().includes('movie') ? 'movie' : 'tv'}/${id}`
+    );
   };
 
   if (query) {
@@ -168,12 +172,20 @@ export default function ListMovie() {
           <button>Search</button>
         </Search>
         {loading ? (
-          <ClipLoader
-            color={'#ffffff'}
-            size={150}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
+          <List style={{gap: '1rem'}}>
+            {Array.from({length: 20}).map(() => (
+              <Skeleton
+                variant="rounded"
+                height={290}
+                style={{
+                  borderRadius: '30px',
+                  width: '100%',
+                }}
+                sx={{bgcolor: 'grey.900'}}
+                animation="wave"
+              />
+            ))}
+          </List>
         ) : (
           <List>
             {data
@@ -192,9 +204,13 @@ export default function ListMovie() {
           </List>
         )}
 
-        <button className="more" onClick={showMore}>
-          Show More
-        </button>
+        {loading ? (
+          ''
+        ) : (
+          <button className="more" onClick={showMore}>
+            Show More
+          </button>
+        )}
       </Container>
     </MainLayout>
   );

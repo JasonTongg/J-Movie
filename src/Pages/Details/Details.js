@@ -11,6 +11,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import {useParams} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {detailMovie} from '../../Redux/movies';
+import Skeleton from '@mui/material/Skeleton';
 
 export default function Details() {
   let {data: videos, isLoading: videoLoading} = useSelector(
@@ -33,7 +34,7 @@ export default function Details() {
 
   return (
     <MainLayout type="detail">
-      <Container style={{paddingInline: '2em'}}>
+      <Container>
         <Swipe grabCursor={true} spaceBetween={10} slidesPerView={1}>
           {videos?.map((item, index) => (
             <SwiperSlide key={index}>
@@ -44,12 +45,15 @@ export default function Details() {
                 </h4>
               </div>
               {videoLoading ? (
-                <ClipLoader
-                  color={'#ffffff'}
-                  loading={videoLoading}
-                  size={150}
-                  aria-label="Loading Spinner"
-                  data-testid="loader"
+                <Skeleton
+                  variant="rounded"
+                  style={{
+                    borderRadius: '30px',
+                    width: '100%',
+                    height: '100%',
+                  }}
+                  sx={{bgcolor: 'grey.900'}}
+                  animation="wave"
                 />
               ) : (
                 <div

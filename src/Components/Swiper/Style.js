@@ -1,4 +1,15 @@
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+
+let show = keyframes`
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+`;
 
 export const SwiperContent = styled.div`
   width: 100%;
@@ -34,6 +45,11 @@ export const SwiperContent = styled.div`
       display: none;
     }
   }
+
+  &.active img {
+    opacity: 0;
+    animation: ${show} 0.7s forwards 0.5s;
+  }
 `;
 
 export const Content = styled.div`
@@ -47,6 +63,19 @@ export const Content = styled.div`
 
   @media only screen and (max-width: 1100px) {
     width: 90%;
+  }
+
+  &.active h2 {
+    opacity: 0;
+    animation: ${show} 0.7s forwards 0.7s;
+  }
+  &.active p {
+    opacity: 0;
+    animation: ${show} 0.7s forwards 0.9s;
+  }
+  &.active .buttons {
+    opacity: 0;
+    animation: ${show} 0.7s forwards 1.1s;
   }
 
   h2,
@@ -96,16 +125,38 @@ export const Content = styled.div`
       color: white;
       font-weight: bold;
       cursor: pointer;
+      font-size: 1.1rem;
     }
 
     .red {
-      background-color: red;
-      border: 1px solid red;
+      background-color: #7a0000;
+      border: 1px solid #7a0000;
+      transition: all 0.5s ease-out;
+
+      &:hover {
+        background-color: transparent;
+        color: #7a0000 !important;
+        transform: scale(1.1);
+      }
     }
 
     .white {
-      background-color: transparent;
+      padding: 0.5rem 1rem;
       border: 1px solid white;
+      color: white;
+      font-size: 1.1rem;
+      border-radius: 100px;
+      background-color: transparent;
+      outline: none;
+      transition: all 0.5s ease-out;
+      cursor: pointer;
+      font-weight: bold;
+
+      &:hover {
+        background-color: white;
+        color: black !important;
+        transform: scale(1.1);
+      }
     }
   }
 `;

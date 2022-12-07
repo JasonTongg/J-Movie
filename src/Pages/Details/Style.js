@@ -2,6 +2,15 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   color: white;
+  padding: 2rem 8rem;
+
+  @media only screen and (max-width: 1000px) {
+    padding: 2rem 4rem;
+  }
+
+  @media only screen and (max-width: 500px) {
+    padding: 2rem 2rem;
+  }
 
   h3 {
     font-size: 1.4rem;
@@ -16,6 +25,7 @@ export const Container = styled.div`
     cursor: grab;
 
     h3 {
+      width: 75%;
       @media only screen and (max-width: 400px) {
         font-size: 1.1rem;
       }
