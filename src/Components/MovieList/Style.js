@@ -25,9 +25,9 @@ export const Container = styled.div`
     position: relative;
     cursor: pointer;
 
-    // @media only screen and (max-width: 500px) {
-    //   width: 250px;
-    // }
+    @media only screen and (max-width: 400px) {
+      width: 250px;
+    }
 
     img {
       width: 100%;
