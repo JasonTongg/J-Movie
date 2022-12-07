@@ -14,11 +14,15 @@ export const Container = styled.div`
     padding: 2rem 2rem;
   }
 
-  .swiper-slide {
+  .gBsoiU .swiper-slide {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px !important;
+
+    // @media only screen and (max-width: 400px) {
+    //   justify-content: flex-start !important;
+    // }
   }
 
   .content {
@@ -26,7 +30,19 @@ export const Container = styled.div`
     cursor: pointer;
 
     @media only screen and (max-width: 400px) {
-      width: 250px;
+      width: 280px;
+    }
+
+    @media only screen and (max-width: 350px) {
+      width: 230px;
+    }
+
+    @media only screen and (max-width: 300px) {
+      width: 220px;
+    }
+
+    @media only screen and (max-width: 250px) {
+      width: 170px;
     }
 
     img {
