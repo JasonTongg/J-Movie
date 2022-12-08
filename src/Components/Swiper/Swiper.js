@@ -8,7 +8,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import ClipLoader from 'react-spinners/ClipLoader';
 import {video} from '../../Redux/movies';
 
-export default function Swiper() {
+let Swiper = React.forwardRef(({onClick}) => {
   let {data, isLoading} = useSelector((state) => state.movie.moviePopular);
   data = data.slice(0, 4);
   let navigate = useNavigate();
@@ -22,6 +22,7 @@ export default function Swiper() {
 
   let fetchVideo = (id) => {
     dispatch(video({id, type: 'movie'}));
+    onClick(true);
   };
 
   if (isLoading) {
@@ -93,4 +94,6 @@ export default function Swiper() {
       ))}
     </Swipe>
   );
-}
+});
+
+export default Swiper;

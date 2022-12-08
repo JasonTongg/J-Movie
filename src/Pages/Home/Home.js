@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   getPopularMovie,
@@ -7,7 +7,7 @@ import {
   getTopRateTV,
   getUpComingMovie,
 } from '../../Redux/movies';
-import {Container} from './Style';
+import {Container, Overlay} from './Style';
 import MovieList from '../../Components/MovieList/MovieList';
 import MainLayout from '../../Layout/MainLayout';
 
@@ -25,6 +25,10 @@ export default function Home() {
   let {data: popularTV, isLoading: tvPopularLoading} = useSelector(
     (state) => state.movie.tvPopular
   );
+  let {data: videos, isLoading: videoLoading} = useSelector(
+    (state) => state.movie.detailsVideo
+  );
+  let [trailer, setTrailer] = useState(false);
 
   useEffect(() => {
     dispatch(getUpComingMovie(1));
@@ -39,8 +43,23 @@ export default function Home() {
   }
 
   return (
-    <MainLayout type="home">
+    <MainLayout type="home" onClick={setTrailer}>
       <Container>
+        {trailer ? (
+          !videoLoading ? (
+            <Overlay onClick={() => setTrailer(false)}>
+              <h2>{videos[0].name}</h2>
+              <iframe
+                title={videos[0].name}
+                src={`https://www.youtube.com/embed/${videos[0].key}?controls=0`}
+              ></iframe>
+            </Overlay>
+          ) : (
+            <Overlay>
+              <h1>Loading..</h1>
+            </Overlay>
+          )
+        ) : null}
         <MovieList
           title="UpComing Movie"
           data={{data: upcoming, loading: movieUpComingLoading}}

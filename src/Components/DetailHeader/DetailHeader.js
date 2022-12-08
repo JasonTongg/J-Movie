@@ -6,7 +6,6 @@ import 'swiper/swiper.min.css';
 import ClipLoader from 'react-spinners/ClipLoader';
 import {Navigate} from 'react-router-dom';
 import profile from '../../Assets/profile_dummy.png';
-// import infoModal from '../InfoModal/InfoModal';
 
 export default function DetailHeader() {
   let {data: credits, isLoading} = useSelector(
@@ -44,7 +43,6 @@ export default function DetailHeader() {
         backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,.5), black), url("https://image.tmdb.org/t/p/original${data.backdrop_path}")`,
       }}
     >
-      {/* <infoModal></infoModal> */}
       <img
         src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
         alt={data.original_title || data.original_name}

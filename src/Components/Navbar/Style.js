@@ -8,7 +8,7 @@ export const Nav = styled.nav`
   padding: 1rem 4rem;
   gap: 2rem;
   color: white;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
@@ -34,11 +34,14 @@ export const Nav = styled.nav`
     padding: 2rem 4rem;
 
     @media only screen and (max-width: 800px) {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      justify-items: center;
+      justify-content: center;
       padding: 2rem;
     }
 
-    @media only screen and (max-width: 440px) {
+    @media only screen and (max-width: 500px) {
       padding: 2rem 1rem;
     }
 
