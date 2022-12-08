@@ -36,10 +36,10 @@ export default function MovieList({title, data, type}) {
             <SwiperSlide key={idx}>
               <Skeleton
                 variant="rounded"
-                width={300}
                 height={290}
                 style={{
                   borderRadius: '30px',
+                  width: '100%',
                 }}
                 sx={{bgcolor: 'grey.900'}}
                 animation="wave"

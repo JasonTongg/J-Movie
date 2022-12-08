@@ -2,7 +2,7 @@ import React from 'react';
 import {Footer as Foo, List} from './Style';
 import Logo from '../Logo/Logo';
 import bg from '../../Assets/background.jpg';
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 export default function Footer() {
   let navigate = useNavigate();
