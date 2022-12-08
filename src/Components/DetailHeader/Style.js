@@ -75,6 +75,10 @@ export const Content = styled.div`
     width: 100vw;
   }
 
+  @media only screen and (max-width: 350px) {
+    padding-top: 188px;
+  }
+
   h2,
   p {
     margin: 0;
@@ -149,10 +153,6 @@ export const Content = styled.div`
     width: 100%;
     opacity: 0;
     animation: ${show} 0.5s forwards 0.8s;
-
-    @media only screen and (max-width: 400px) {
-      display: none;
-    }
 
     .content {
       width: 80px;

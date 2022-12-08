@@ -10,6 +10,7 @@ import {
 import {Container, Overlay} from './Style';
 import MovieList from '../../Components/MovieList/MovieList';
 import MainLayout from '../../Layout/MainLayout';
+import {IoClose} from 'react-icons/io5';
 
 export default function Home() {
   let dispatch = useDispatch();
@@ -48,7 +49,10 @@ export default function Home() {
         {trailer ? (
           !videoLoading ? (
             <Overlay onClick={() => setTrailer(false)}>
-              <h2>{videos[0].name}</h2>
+              <h2>
+                {videos[0].name}{' '}
+                <IoClose onClick={() => setTrailer(false)}></IoClose>
+              </h2>
               <iframe
                 title={videos[0].name}
                 src={`https://www.youtube.com/embed/${videos[0].key}?controls=0`}

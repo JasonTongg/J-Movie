@@ -31,6 +31,21 @@ export const Overlay = styled.div`
     color: white;
     opacity: 0;
     animation: ${show} 0.5s forwards;
+    text-align: center;
+    position: relative;
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    right: -30%;
+    z-index: 10000;
+    transform: translateY(-50%);
+
+    &:hover {
+      color: #7a0000;
+      cursor: pointer;
+    }
   }
 
   iframe {
@@ -38,5 +53,25 @@ export const Overlay = styled.div`
     height: 400px;
     opacity: 0;
     animation: ${show} 0.5s forwards 0.2s;
+
+    @media only screen and (max-width: 700px) {
+      width: 500px;
+      height: 350px;
+    }
+
+    @media only screen and (max-width: 500px) {
+      width: 300px;
+      height: 200px;
+    }
+
+    @media only screen and (max-width: 300px) {
+      width: 250px;
+      height: 200px;
+    }
+
+    @media only screen and (max-width: 250px) {
+      width: 200px;
+      height: 150px;
+    }
   }
 `;

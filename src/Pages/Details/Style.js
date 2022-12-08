@@ -25,7 +25,6 @@ export const Container = styled.div`
     cursor: grab;
 
     h3 {
-      width: 75%;
       @media only screen and (max-width: 400px) {
         font-size: 1.1rem;
       }

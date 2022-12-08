@@ -29,7 +29,7 @@ export default function MovieList({title, data, type}) {
         </Header>
         <Swipe
           grabCursor={true}
-          spaceBetween={window.innerWidth > 500 ? 40 : 20}
+          spaceBetween={50}
           slidesPerView={((window.innerWidth - 128) / 250).toFixed(2)}
         >
           {Array.from({length: 6}).map((_, idx) => (
@@ -52,10 +52,12 @@ export default function MovieList({title, data, type}) {
   }
 
   return (
-    <Container>
+    <Container style={title === 'Similar' ? {padding: '2rem 0'} : null}>
       <Header>
         <h3>{title}</h3>
-        <Buttons action={showMore}>View More</Buttons>
+        {title === 'Similar' ? null : (
+          <Buttons action={showMore}>View More</Buttons>
+        )}
       </Header>
 
       <Swipe

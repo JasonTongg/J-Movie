@@ -38,7 +38,11 @@ export default function Details() {
           {videos?.map((item, index) => (
             <SwiperSlide key={index}>
               <div className="header">
-                <h3>{item.name}</h3>
+                <h3>
+                  {item.name.length > 20
+                    ? item.name.slice(0, 19) + '...'
+                    : item.name}
+                </h3>
                 <h4>
                   <CgArrowsExchangeAlt /> Slide here
                 </h4>
@@ -84,7 +88,6 @@ export default function Details() {
           title="Similar"
           data={{data: similar, loading: similarLoading}}
           type={type}
-          style={{paddingInline: '0 !important'}}
         />
       </Container>
     </MainLayout>

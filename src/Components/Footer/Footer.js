@@ -2,8 +2,10 @@ import React from 'react';
 import {Footer as Foo, List} from './Style';
 import Logo from '../Logo/Logo';
 import bg from '../../Assets/background.jpg';
+import {useNavigate} from 'react-router-dom';
 
 export default function Footer() {
+  let navigate = useNavigate();
   return (
     <Foo
       style={{
@@ -13,10 +15,9 @@ export default function Footer() {
       <Logo></Logo>
       <List>
         <ul>
-          <li>Home</li>
-          <li>Contact Us</li>
-          <li>Term of Services</li>
-          <li>About us</li>
+          <li onClick={() => navigate('/')}>Home</li>
+          <li onClick={() => navigate('/List/movie')}>Movies</li>
+          <li onClick={() => navigate('/List/tv')}>TV Series</li>
         </ul>
         <ul>
           <li>Live</li>

@@ -31,6 +31,7 @@ export default function ListMovie() {
   let {data: popularTV, isLoading: tvPopularLoading} = useSelector(
     (state) => state.movie.tvPopular
   );
+
   let data, loading;
   let {type} = useParams();
   let searchRef = useRef();
@@ -64,6 +65,7 @@ export default function ListMovie() {
       break;
   }
 
+  let [first, setFirst] = useState(true);
   let [page, setPage] = useState(1);
   let [query, setQuery] = useState('');
   let dispatch = useDispatch();
@@ -87,6 +89,7 @@ export default function ListMovie() {
           dispatch(discoverMovie({page, type}));
           break;
         case 'tv':
+          console.log('tes');
           dispatch(discoverMovie({page, type}));
           break;
         case 'Top Rated TV Series':
@@ -109,12 +112,17 @@ export default function ListMovie() {
 
   useEffect(() => {
     if (query.length > 0) {
-      let tipe = type.includes('movie') ? 'movie' : 'tv';
+      if (first === true) {
+        setPage(1);
+        setFirst(false);
+      }
+      let tipe = type.toLowerCase().includes('movie') ? 'movie' : 'tv';
       let debounce = setTimeout(() => {
         dispatch(search({type: tipe, query, page}));
       }, 500);
       return () => clearTimeout(debounce);
     }
+    // eslint-disable-next-line
   }, [query, page, dispatch, type]);
 
   useEffect(() => {
@@ -122,8 +130,16 @@ export default function ListMovie() {
   }, [page]);
 
   useEffect(() => {
+    if (query === '') {
+      setFirst(true);
+      setPage(1);
+    }
+  }, [query]);
+
+  useEffect(() => {
     setPage(1);
     setQuery('');
+    setFirst(true);
     if (searchRef.current) {
       searchRef.current.value = '';
     }
