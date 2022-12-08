@@ -20,7 +20,7 @@ export default function DetailHeader() {
       <Container style={{justifyItems: 'center', gridTemplateColumns: '1fr'}}>
         <ClipLoader
           color={'#ffffff'}
-          size={150}
+          size={window.innerWidth > 500 ? 150 : 80}
           aria-label="Loading Spinner"
           data-testid="loader"
         />
