@@ -11,6 +11,10 @@ export const Buttons = styled.button`
   transition: all 0.5s ease-out;
   cursor: pointer;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 
   &:hover {
     background-color: white;

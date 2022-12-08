@@ -35,19 +35,6 @@ export const Overlay = styled.div`
     position: relative;
   }
 
-  svg {
-    position: absolute;
-    top: -80%;
-    right: 50%;
-    z-index: 10000;
-    transform: translateX(50%);
-
-    &:hover {
-      color: #7a0000;
-      cursor: pointer;
-    }
-  }
-
   iframe {
     width: 700px;
     height: 400px;
