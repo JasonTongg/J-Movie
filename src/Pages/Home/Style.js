@@ -40,6 +40,7 @@ export const Overlay = styled.div`
     top: -80%;
     right: 50%;
     z-index: 10000;
+    transform: translateX(50%);
 
     &:hover {
       color: #7a0000;
