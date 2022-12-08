@@ -37,10 +37,9 @@ export const Overlay = styled.div`
 
   svg {
     position: absolute;
-    top: 50%;
-    right: -30%;
+    top: -80%;
+    right: 50%;
     z-index: 10000;
-    transform: translateY(-50%);
 
     &:hover {
       color: #7a0000;
