@@ -183,7 +183,7 @@ export default function ListMovie() {
             onChange={(e) => setQuery(e.target.value)}
             ref={searchRef}
           />
-          <button>Search</button>
+          <button type="button">Search</button>
         </Search>
         {loading ? (
           <List style={{gap: '1rem'}}>
