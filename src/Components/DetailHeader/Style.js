@@ -33,6 +33,7 @@ export const Container = styled.div`
   @media only screen and (max-width: 600px) {
     min-height: 0;
     height: fit-content;
+    min-height: 600px;
   }
 
   @media only screen and (max-width: 350px) {
