@@ -12,6 +12,17 @@ export const Footer = styled.footer`
   background-size: cover;
   background-repeat: no-repeat;
 
+  p {
+    text-align: center;
+    font-size: 1.3rem;
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
+
   @media only screen and (max-width: 800px) {
     padding-bottom: 150px;
   }
@@ -41,7 +52,7 @@ export const List = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 3rem;
+  margin-block: 3rem;
 
   @media only screen and (max-width: 600px) {
     flex-direction: column;

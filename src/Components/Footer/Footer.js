@@ -2,7 +2,7 @@ import React from 'react';
 import {Footer as Foo, List} from './Style';
 import Logo from '../Logo/Logo';
 import bg from '../../Assets/background.jpg';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 export default function Footer() {
   let navigate = useNavigate();
@@ -31,6 +31,10 @@ export default function Footer() {
           <li>Top Movies and TV Series</li>
         </ul>
       </List>
+      <p>
+        Make with &hearts; by{' '}
+        <a href={'https://www.linkedin.com/in/jason-tong-42600319a/'}>Jason</a>
+      </p>
     </Foo>
   );
 }
