@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {Container, Header} from './Style';
 import {Swiper as Swipe, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper.min.css';
@@ -9,16 +9,22 @@ import Skeleton from '@mui/material/Skeleton';
 export default function MovieList({title, data, type}) {
   let navigate = useNavigate();
 
-  let dataa = data.data?.filter((item) => item.poster_path).slice(0, 10);
+  let dataa = useMemo(
+    () => data.data?.filter((item) => item.poster_path).slice(0, 10),
+    [data.data]
+  );
 
-  let toDetails = (id) => {
-    navigate(`/details/${type}/${id}`);
-    window.scrollTo(0, 0);
-  };
+  let toDetails = useCallback(
+    (id) => {
+      navigate(`/details/${type}/${id}`);
+      window.scrollTo(0, 0);
+    },
+    [navigate, type]
+  );
 
-  let showMore = () => {
+  let showMore = useCallback(() => {
     navigate(`/list/${title}`);
-  };
+  }, [navigate, title]);
 
   if (data.loading) {
     return (

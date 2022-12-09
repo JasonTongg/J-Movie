@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useCallback} from 'react';
 import {Container, Search, List, Item} from './Style';
 import MainLayout from '../../Layout/MainLayout';
 import {useSelector, useDispatch} from 'react-redux';
@@ -71,11 +71,16 @@ export default function ListMovie() {
   let dispatch = useDispatch();
   let navigate = useNavigate();
 
-  let toDetails = (id) => {
-    navigate(
-      `/details/${type.toLowerCase().includes('movie') ? 'movie' : 'tv'}/${id}`
-    );
-  };
+  let toDetails = useCallback(
+    (id) => {
+      navigate(
+        `/details/${
+          type.toLowerCase().includes('movie') ? 'movie' : 'tv'
+        }/${id}`
+      );
+    },
+    [navigate, type]
+  );
 
   if (query) {
     data = discoverData;
@@ -145,9 +150,9 @@ export default function ListMovie() {
     }
   }, [type]);
 
-  let showMore = () => {
+  let showMore = useCallback(() => {
     setPage((old) => old + 1);
-  };
+  }, []);
 
   if (!loading && data.length === 0) {
     return (
